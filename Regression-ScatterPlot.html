@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Prices Visualization</title>
+    <!-- Reference the locally installed Plotly.js file -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- Container for the plot -->
+    <div id="myPlot" style="width: 400px; height: 400px;"></div>
+
+    <script>
+        const xArray = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180];
+        const yArray = [700, 800, 800, 900, 900, 900, 1000, 1100, 1400, 1400, 1500, 1600, 1700, 1800];
+
+        // Define Data
+        const data = [{
+            x: xArray,
+            y: yArray,
+            mode: "markers",
+            marker: {
+                size: 8 // Set marker size
+            }
+        }];
+
+        // Define Layout
+        const layout = {
+            xaxis: { range: [40, 280], title: "Square Meters" },
+            yaxis: { range: [5, 2000], title: "Price in Dollars" }, // Adjust y-axis range for better visibility
+            title: "Renting Prices vs. Size"
+        };
+
+        // Create the plot
+        Plotly.newPlot("myPlot", data, layout);
+    </script>
+</body>
+</html>

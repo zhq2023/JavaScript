@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plotly Example</title>
+    <!-- 引入 Plotly 库 -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="myPlot"></div>
+
+    <script>
+        let slope = 1.2;
+        let intercept = 7;
+        const xValues = [];
+        const yValues = [];
+        
+        // Generate values
+        for (let x = 0; x <= 10; x += 1) {
+          xValues.push(x);
+          yValues.push(x * slope + intercept);
+        }
+        
+        // Define Data
+        const data = [{
+          x: xValues,
+          y: yValues,
+          mode: "lines"
+        }];
+        
+        // Define Layout
+        const layout = {title: "Slope=" + slope + " Intercept=" + intercept};
+        
+        // Display using Plotly
+        Plotly.newPlot("myPlot", data, layout);
+    </script>
+</body>
+</html>

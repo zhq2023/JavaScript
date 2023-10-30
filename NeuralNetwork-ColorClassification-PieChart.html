@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Results</title>
+    <!-- Reference the locally installed Chart.js file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+    <!-- Reference the locally installed brain.js file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brain.js/2.0.0-beta.23/browser.min.js"></script>
+</head>
+<body>
+    <!-- Canvas for the chart -->
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        window.onload = function() {
+            // Create a Neural Network
+            const net = new brain.NeuralNetwork();
+
+            // Train the Network with 4 input objects
+            net.train([
+                // White RGB(255, 255, 255)
+                { input: [255/255, 255/255, 255/255], output: { light: 1 } },
+                // Light grey (192, 192, 192)
+                { input: [192/255, 192/255, 192/255], output: { light: 1 } },
+                // Dark grey (64, 64, 64)
+                { input: [65/255, 65/255, 65/255], output: { dark: 1 } },
+                // Black (0, 0, 0)
+                { input: [0, 0, 0], output: { dark: 1 } }
+            ]);
+
+            // What is the expected output of Dark Blue (0, 0, 128)?
+            let result = net.run([0, 0, 128/255]);
+
+            // Display the probability of "dark" and "light"
+            let probabilityData = [
+                { label: 'Dark', value: result.dark },
+                { label: 'Light', value: result.light },
+            ];
+
+            // Get the canvas context
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Create a pie chart
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: probabilityData.map(item => item.label),
+                    datasets: [{
+                        data: probabilityData.map(item => item.value),
+                        backgroundColor: ['#2e3033', '#FFEB3B'], // Dark and light colors
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Neural Network Color Classification Probability',
+                    },
+                    maintainAspectRatio: false // Disable automatic resizing
+                }
+            });
+        };
+    </script>
+</body>
+</html>
+
+
