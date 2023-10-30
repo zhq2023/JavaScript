@@ -19,5 +19,7 @@ This repository contains code and visualizations created using JavaScript. The p
    
 ## Dependencies
 Chart.js
+
 Plotly.js
+
 brain.js
